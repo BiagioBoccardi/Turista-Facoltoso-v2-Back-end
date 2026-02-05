@@ -13,6 +13,22 @@ Lo schema viene inizializzato all'avvio e puo essere popolato automaticamente co
 - `Repository/query`: query di lettura e reportistica.
 - `Repository/ddl`: creazione tabelle, funzioni e trigger database.
 - `Utils`: connessione DB, seeding e bootstrap.
+## Struttura Progetto (sintesi)
+```text
+brief/
+  pom.xml
+  README.md
+  src/main/java/com/demo/
+    App.java
+    controller/
+    model/
+    service/
+    Repository/
+      ddl/
+      dml/
+      query/
+    Utils/
+```
 
 ## Stack Tecnologico
 - Java 21
@@ -162,21 +178,6 @@ Comandi Maven principali:
 - `mvn clean package`
 - `mvn test`
 
-## Struttura Progetto (sintesi)
-```text
-brief/
-  pom.xml
-  README.md
-  src/main/java/com/demo/
-    App.java
-    controller/
-    model/
-    service/
-    Repository/
-      ddl/
-      dml/
-      query/
-    Utils/
-```
+
 
 
