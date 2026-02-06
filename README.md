@@ -13,22 +13,6 @@ Lo schema viene inizializzato all'avvio e puo essere popolato automaticamente co
 - `Repository/query`: query di lettura e reportistica.
 - `Repository/ddl`: creazione tabelle, funzioni e trigger database.
 - `Utils`: connessione DB, seeding e bootstrap.
-## Struttura Progetto (sintesi)
-```text
-brief/
-  pom.xml
-  README.md
-  src/main/java/com/demo/
-    App.java
-    controller/
-    model/
-    service/
-    Repository/
-      ddl/
-      dml/
-      query/
-    Utils/
-```
 
 ## Stack Tecnologico
 - Java 21
@@ -71,6 +55,12 @@ Conseguenza API:
 ### Vincolo anti-overlap prenotazioni
 Trigger PostgreSQL blocca prenotazioni sovrapposte sulla stessa abitazione.
 
+### Feedback
+- Lasciabile solo da utenti che hanno **gia soggiornato** in un'abitazione.
+- Riferito al proprietario dell'abitazione prenotata (derivato da prenotazione -> abitazione -> host).
+- Un solo feedback per prenotazione.
+- Punteggio obbligatorio da 1 a 5.
+
 ## Configurazione
 Le credenziali DB sono in:
 - `src/main/java/com/demo/Utils/DbConnection.java`
@@ -111,6 +101,13 @@ Il seeder genera anche prenotazioni extra per portare almeno un host oltre la so
 - `PUT /prenotazioni/{prenotazioneId}`
 - `DELETE /prenotazioni/{prenotazioneId}`
 - `GET /prenotazioni/ultima/{utenteId}`
+- `GET /prenotazioni/{prenotazioneId}/feedback`
+
+### Feedback
+- `GET /feedback`
+- `POST /feedback`
+- `PUT /feedback/{feedbackId}`
+- `DELETE /feedback/{feedbackId}`
 
 ### Host
 - `GET /host`
@@ -173,11 +170,36 @@ Questi endpoint forzano i top 3 host (per `codice_host`) a `is_superhost = true`
 }
 ```
 
+### `POST /feedback`
+```json
+{
+  "prenotazione_id": "00000000-0000-0000-0000-000000000000",
+  "titolo": "Ottima esperienza",
+  "testo": "Esperienza ottima, servizio rapido.",
+  "punteggio": 5
+}
+```
+
 ## Build e Test
 Comandi Maven principali:
 - `mvn clean package`
 - `mvn test`
 
-
+## Struttura Progetto (sintesi)
+```text
+brief/
+  pom.xml
+  README.md
+  src/main/java/com/demo/
+    App.java
+    controller/
+    model/
+    service/
+    Repository/
+      ddl/
+      dml/
+      query/
+    Utils/
+```
 
 
